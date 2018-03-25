@@ -1,6 +1,7 @@
 <template>
   <div class="star" :class="starType">
-    <span v-for="itemClass in itemClasses" :class="itemClass" class="star-item" track-by="$index" v-bind:key="itemClass"></span>
+    <span v-for="(itemClass, index) in itemClasses" :class="itemClass" class="star-item"
+          v-bind:key="index"></span>
   </div>
 </template>
 
