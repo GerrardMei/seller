@@ -220,9 +220,10 @@
       height: 100%
       overflow: auto
       background-color: rgba(7, 17, 27, 0.8)
-      -webkit-backdrop-filter: blur(10px)
+      backdrop-filter: blur(10px)
+      opacity: 1
       &.fade-enter-active, &.fade-leave-active
-        transition: opacity 0.5s
+        transition: all 0.5s
       &.fade-enter, &.fade-leave-to
         opacity: 0
       .detail-wrapper

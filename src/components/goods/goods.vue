@@ -31,7 +31,7 @@
                                                                            v-show="food.oldPrice">￥{{food.oldPrice}}</span>
                 </div>
                 <div class="cartcontrol-wrapper">
-                  <cartcontrol :food="food"></cartcontrol>
+                  <cartcontrol @cart-add="cartAdd" :food="food"></cartcontrol>
                 </div>
               </div>
             </li>
@@ -109,6 +109,9 @@
           height += item.clientHeight;
           this.listHeight.push(height);
         }
+      },
+      cartAdd(target) {
+        this._drop(target);
       }
     },
     computed: {
@@ -139,9 +142,10 @@
       cartcontrol
     },
     events: {
-      'cart.add'(target) {
-        this._drop(target);
-      }
+      //   'cartAdd'(target) {
+      //   console.log(target);
+      //   this._drop(target);
+      // }
     }
   };
 
