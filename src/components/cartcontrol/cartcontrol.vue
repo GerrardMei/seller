@@ -1,12 +1,12 @@
 <template>
   <div class="cartcontrol">
     <transition name="move">
-      <div class="cart-decrease" v-show="food.count>0" @click="decreaseCart($event)" transition="move">
+      <div class="cart-decrease" v-show="food.count>0" v-on:click="decreaseCart($event)">
         <span class="inner icon-remove_circle_outline"></span>
       </div>
     </transition>
     <div class="cart-count" v-show="food.count>0">{{food.count}}</div>
-    <div class="cart-add icon-add_circle" @click="addCart($event)"></div>
+    <div class="cart-add icon-add_circle" v-on:click="addCart($event)"></div>
   </div>
 </template>
 
@@ -32,6 +32,7 @@
         } else {
           this.food.count++;
         }
+        this.$emit('cart.add', event.target);
       },
       decreaseCart(event) {
         if (!event._constructed) {
@@ -52,8 +53,7 @@
       display: inline-block
       padding: 6px
       transition: all .4s linear
-      &.move-enter-active
-        opacity: 1
+      &.move-enter-active, &.move-leave-active
         transform: translate3d(0, 0, 0)
         .inner
           transform: rotate(0)

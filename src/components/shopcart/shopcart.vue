@@ -15,6 +15,13 @@
         <div class="pay" :class="{'highlight':minPrice<=totalPrice}">{{payDesc}}</div>
       </div>
     </div>
+    <div class="ball-wrapper">
+      <transition-group>
+        <div class="ball" v-for="(ball,index) in balls" v-bind:key="index" v-show="ball.show">
+          <div class="inner"></div>
+        </div>
+      </transition-group>
+    </div>
   </div>
 </template>
 
@@ -42,7 +49,25 @@
       }
     },
     data() {
-      return {};
+      return {
+        balls: [
+          {
+            show: false
+          },
+          {
+            show: false
+          },
+          {
+            show: false
+          },
+          {
+            show: false
+          },
+          {
+            show: false
+          }
+        ]
+      };
     },
     computed: {
       totalPrice() {
@@ -68,6 +93,11 @@
         } else {
           return '去结算';
         }
+      }
+    },
+    methods: {
+      drop(el) {
+        console.log(el);
       }
     }
   };
@@ -163,4 +193,18 @@
             background-color: #00b43c
             color: #fff
             font-size: 14px
+    .ball-wrapper
+      .ball
+        position: fixed
+        left: 32px
+        bottom: 22px
+        z-index: 200
+        &.drop-transition
+          transition: all 0.4s
+          .inner
+            width: 16px
+            height: 16px
+            border-radius: 50%
+            background-color: rgb(0, 160, 220)
+            transition: all 0.4s
 </style>

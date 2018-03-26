@@ -16,6 +16,7 @@ Vue.use(VueResource);
 const router = new VueRouter({
   linkActiveClass: 'active',
   routes: [
+    {path: '/', component: goods},
     {path: '/goods', component: goods},
     {path: '/ratings', component: ratings},
     {path: '/seller', component: seller}

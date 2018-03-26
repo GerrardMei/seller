@@ -4,7 +4,7 @@
     <div class="menu-wrapper" ref="menuWrapper">
       <ul>
         <li class="menu-item" v-for="(item, index) in goods" v-bind:key="index"
-            :class="{'current':currentIndex===index}" @click="selectMenu(index,$event)">
+            :class="{'current':currentIndex===index}" v-on:click="selectMenu(index,$event)">
           <span class="text border-1px">
             <span v-show="item.type > 0" class="icon" :class="classMap[item.type]"></span>{{item.name}}
           </span>
@@ -39,7 +39,8 @@
         </li>
       </ul>
     </div>
-    <shopcart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+    <shopcart ref="shopcart" :select-foods="selectFoods" :delivery-price="seller.deliveryPrice"
+              :min-price="seller.minPrice"></shopcart>
   </div>
 </template>
 
@@ -83,6 +84,9 @@
         let foodList = this.$refs.foodWrapper.getElementsByClassName('food-list-hook');
         let el = foodList[index];
         this.foodScroll.scrollToElement(el, 300);
+      },
+      _drop(target) {
+        this.$refs.shopcart.drop(target);
       },
       _initScroll() {
         this.menuScroll = new BScroll(this.$refs.menuWrapper, {
@@ -133,6 +137,11 @@
     components: {
       shopcart,
       cartcontrol
+    },
+    events: {
+      'cart.add'(target) {
+        this._drop(target);
+      }
     }
   };
 
